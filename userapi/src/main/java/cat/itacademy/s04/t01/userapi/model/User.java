@@ -12,7 +12,7 @@ public class User {
     }
 
     public User(UUID id, String name, String email) {
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.name = name;
         this.email = email;
     }
