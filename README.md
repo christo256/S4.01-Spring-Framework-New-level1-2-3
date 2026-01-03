@@ -79,7 +79,7 @@ Example request (POST/users)
 ```
 
 ---
-##📦 Project Structure
+## 📦 Project Structure
 ```css
 src
  ├─ main
@@ -96,7 +96,7 @@ src
 ```
 
 ---
-##🤝 Contributions
+## 🤝 Contributions
 
 This project is part of a learning exercise.
 To extend it:
