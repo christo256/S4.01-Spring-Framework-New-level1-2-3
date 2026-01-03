@@ -2,6 +2,7 @@ package cat.itacademy.s04.t01.userapi.controllers;
 
 import cat.itacademy.s04.t01.userapi.exceptions.UserNotFoundException;
 import cat.itacademy.s04.t01.userapi.model.User;
+import cat.itacademy.s04.t01.userapi.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,46 +13,26 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
 
-    private static final List<User> users = new ArrayList<>();
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
 
     @GetMapping
-    public List<User> getAllUsers(
-        @RequestParam(required = false) String name
-    ) {
-        if (name == null) {
-            return users;
-        }
-
-
-        return users.stream()
-                .filter(user -> user.getName().toLowerCase()
-                .contains(name.toLowerCase())
-                )
-                .toList();
-
+    public List<User> getUsers(@RequestParam(required = false) String name) {
+        return userService.getAllUsers(name);
     }
+
 
     @PostMapping
     public User createUser(@RequestBody User user) {
-
-        User newUser = new User(
-                UUID.randomUUID(),
-                user.getName(),
-                user.getEmail()
-        );
-        users.add(newUser);
-        return newUser;
+        return userService.createUser(user);
     }
+
     @GetMapping("/{id}")
     public User getUserById(@PathVariable UUID id) {
-        return users.stream()
-                .filter(user -> user.getId().equals(id))
-                .findFirst()
-                .orElseThrow(UserNotFoundException::new);
-    }
-
-    static void clearUsers() {
-        users.clear();
+        return userService.getUserById(id);
     }
 }
