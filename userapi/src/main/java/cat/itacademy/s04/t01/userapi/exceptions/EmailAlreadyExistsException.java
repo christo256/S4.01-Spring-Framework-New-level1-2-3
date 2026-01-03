@@ -1,0 +1,8 @@
+package cat.itacademy.s04.t01.userapi.exceptions;
+
+public class EmailAlreadyExistsException extends RuntimeException {
+    public EmailAlreadyExistsException() {
+        super("Email already exists");
+    }
+}
+
