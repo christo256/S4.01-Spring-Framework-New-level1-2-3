@@ -50,6 +50,8 @@ public class UserController {
                 .findFirst()
                 .orElseThrow(UserNotFoundException::new);
     }
+
+    static void clearUsers() {
+        users.clear();
+    }
 }
-
-
